@@ -7,15 +7,16 @@
 #include <QTimer>
 #include <QKeyEvent>
 #include <QPainter>
+#include <QLabel>
 
 using namespace std;
 
 class MyScene : public QGraphicsScene {
     Q_OBJECT
 private :
-    //QGraphicsPixmapItem* bananes;
     QGraphicsPixmapItem* singe;
-    QTimer* timer;
+    QLabel* compteur;
+    QTimer* timer1;
     QTimer* timer2;
     QTimer* timer3;
     QList<QGraphicsPixmapItem*> bananesList;

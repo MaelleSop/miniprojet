@@ -3,14 +3,11 @@
 #include "Utils.h"
 
 MyScene::MyScene(QObject* parent) : QGraphicsScene(parent) {
-    /* ***** tests ajout objets à la scène *****
-    QGraphicsRectItem* qgri = new QGraphicsRectItem(10, 100, 300, 200, nullptr);
-    this->addItem(qgri);
-    QGraphicsTextItem* qgti = new QGraphicsTextItem("CIR2 Rennes");
-    this->addItem(qgti);
-    **********/
 
     nbrBananesRecup = 0;
+    compteur = new QLabel(QString("score : ").arg(nbrBananesRecup));
+    compteur->setAlignment(Qt::AlignCenter);
+    compteur->setFixedSize(100,50);
 
     this->setSceneRect(0, 0, 500, 800);
 
@@ -18,12 +15,11 @@ MyScene::MyScene(QObject* parent) : QGraphicsScene(parent) {
     singe = new QGraphicsPixmapItem(pixmapSinge);
 
     singe->setPos(10, 450);
-
     this->addItem(singe);
 
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-    timer->start(30); //toutes les 30 millisecondes
+    timer1 = new QTimer(this);
+    connect(timer1, SIGNAL(timeout()), this, SLOT(update()));
+    timer1->start(30); //toutes les 30 millisecondes
 
     timer2 = new QTimer(this);
     connect(timer2, SIGNAL(timeout()), this, SLOT(insererBananes()));
@@ -60,11 +56,16 @@ void MyScene::update() {
             QPointF posBananes = bananesList[i]->pos(); //récupération de la position de l’objet bananes
             bananesList[i]->setPos(posBananes.rx(), posBananes.ry()+5); //incrémentation de la coordonnée y
         }
-        if(bananesList[i]->collidesWithItem(singe) || bananesList[i]->y()>740){
+        if(bananesList[i]->collidesWithItem(singe)){
             removeItem(bananesList[i]);
             bananesList.remove(i);
             nbrBananesRecup ++;
+            compteur->setText(QString("score : ").arg(nbrBananesRecup));
             qDebug() << nbrBananesRecup;
+        }
+        else if(bananesList[i]->y()>740){
+            removeItem(bananesList[i]);
+            bananesList.remove(i);
         }
     }
     for(int j=0; j<buissonsList.size(); j++){
@@ -72,11 +73,16 @@ void MyScene::update() {
             QPointF posBuisson = buissonsList[j]->pos(); //récupération de la position de l’objet buisson
             buissonsList[j]->setPos(posBuisson.rx(), posBuisson.ry()+5); //incrémentation de la coordonnée y
         }
-        if(buissonsList[j]->collidesWithItem(singe) || buissonsList[j]->y()>740){
+        if(buissonsList[j]->collidesWithItem(singe)){
             removeItem(buissonsList[j]);
             buissonsList.remove(j);
-            //MainWindow::mainScene->close();
-
+            timer1->stop();
+            timer2->stop();
+            timer3->stop();
+        }
+        else if(buissonsList[j]->y()>740){
+            removeItem(buissonsList[j]);
+            buissonsList.remove(j);
         }
     }
 }
@@ -87,13 +93,10 @@ void MyScene::keyPressEvent(QKeyEvent *event) {
             singe->setPos(singe->x()-10, singe->y());
         }
     }
-    if(event->key() == Qt::Key_D || event->key() == Qt::Key_Right){     //deplacement à droite
-        if(singe->x()>0 && singe->x()<389){
-            singe->setPos(singe->x()+10, singe->y());
+    if(event->key() == Qt::Key_D || event->key() == Qt::Key_Right) {     //deplacement à droite
+        if (singe->x() > 0 && singe->x() < 389) {
+            singe->setPos(singe->x() + 10, singe->y());
         }
-    }
-    else{
-        QGraphicsScene::keyPressEvent(event);
     }
 }
 
