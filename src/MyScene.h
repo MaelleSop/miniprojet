@@ -21,6 +21,8 @@ private :
     QTimer* timer3;
     QList<QGraphicsPixmapItem*> bananesList;
     QList<QGraphicsPixmapItem*> buissonsList;
+    QGraphicsTextItem* textScore;
+
     int nbrBananesRecup;
 
 public:
@@ -28,6 +30,7 @@ public:
     virtual ~MyScene();
     void keyPressEvent(QKeyEvent* event);
     void drawBackground(QPainter* painter, const QRectF &rect);
+    void affichageScore();
 
 public slots :
     void update();

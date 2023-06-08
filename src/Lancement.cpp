@@ -2,7 +2,6 @@
 
 Lancement::Lancement(QObject* parent) : QGraphicsScene(parent){
     this->setSceneRect(0, 0, 500, 800);
-
 }
 
 void Lancement::drawBackground(QPainter* painter, const QRectF &rect) {

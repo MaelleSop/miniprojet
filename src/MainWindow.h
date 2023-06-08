@@ -8,6 +8,7 @@
 #include <QMenuBar>
 #include <QAction>
 #include <QMessageBox>
+#include <QTextEdit>
 
 #include "MyScene.h"
 

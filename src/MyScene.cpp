@@ -28,6 +28,34 @@ MyScene::MyScene(QObject* parent) : QGraphicsScene(parent) {
     timer3 = new QTimer(this);
     connect(timer3, SIGNAL(timeout()), this, SLOT(insererBuissons()));
     timer3->start(3500);
+
+    // Affichage de l'entête et des scores
+
+    QGraphicsRectItem* rectScore = new QGraphicsRectItem(0, 0, 500, 40);
+
+    QBrush whiteBrush(Qt::white);
+    rectScore->setBrush(whiteBrush);
+
+    this->addItem(rectScore);
+
+    QImage image("../img/bananes.png");
+    QImage resizedImage = image.scaled(30, 30, Qt::KeepAspectRatio);
+
+    QPixmap banane = QPixmap::fromImage(resizedImage);
+    QGraphicsPixmapItem* imgBanane = new QGraphicsPixmapItem(banane);
+    imgBanane->setPos(10, 5);
+
+    this->addItem(imgBanane);
+
+    this->textScore = new QGraphicsTextItem();
+    textScore->setPos(40, 0);
+
+    // Augmentation de la taille du texte
+    QFont font;
+    font.setPointSize(20);
+    textScore->setFont(font);
+
+    this->addItem(textScore);
 }
 
 MyScene::~MyScene() {
@@ -61,6 +89,8 @@ void MyScene::update() {
             bananesList.remove(i);
             nbrBananesRecup ++;
             compteur->setText(QString("score : ").arg(nbrBananesRecup));
+            textScore->setPlainText(QString::number(nbrBananesRecup));
+
             qDebug() << nbrBananesRecup;
         }
         else if(bananesList[i]->y()>740){
@@ -104,4 +134,7 @@ void MyScene::drawBackground(QPainter* painter, const QRectF &rect) {
     Q_UNUSED(rect);
     QPixmap pixBackground("../img/jungle_ok");
     painter->drawPixmap(QPointF(0,0), pixBackground, sceneRect());
+}
+
+void MyScene::affichageScore(){
 }

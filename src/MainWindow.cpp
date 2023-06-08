@@ -1,3 +1,4 @@
+#include <QBoxLayout>
 #include "MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
@@ -12,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     this->setWindowTitle("My main window");
     this->setFixedSize(500, 800);
 
-    regleMenu = menuBar()->addMenu(tr("&egle"));
+    regleMenu = menuBar()->addMenu(tr("&regle"));
     QAction* actionRegle = new QAction(tr("&About"), this);
     connect(actionRegle, SIGNAL(triggered()), this, SLOT(slot_aboutRegle()));
     regleMenu->addAction(actionRegle);
