@@ -21,9 +21,10 @@ private :
     QTimer* timer3;
     QList<QGraphicsPixmapItem*> bananesList;
     QList<QGraphicsPixmapItem*> buissonsList;
-    int nbrBananesRecup;
 
 public:
+    int nbrBananesRecup;
+    static bool gameIsOn;
     MyScene(QObject* parent = nullptr);
     virtual ~MyScene();
     void keyPressEvent(QKeyEvent* event);

@@ -2,9 +2,12 @@
 #include "MainWindow.h"
 #include "Utils.h"
 
+bool MyScene::gameIsOn = true;
+
 MyScene::MyScene(QObject* parent) : QGraphicsScene(parent) {
 
     nbrBananesRecup = 0;
+
     compteur = new QLabel(QString("score : ").arg(nbrBananesRecup));
     compteur->setAlignment(Qt::AlignCenter);
     compteur->setFixedSize(100,50);
@@ -43,7 +46,7 @@ void MyScene::insererBananes(){
 }
 
 void MyScene::insererBuissons(){
-    QGraphicsPixmapItem* buisson = new QGraphicsPixmapItem(QPixmap("../img/buisson.png"));
+    QGraphicsPixmapItem* buisson = new QGraphicsPixmapItem(QPixmap("../img/gorille.png"));
     int x = Utils::randInt(0,400);
     buisson->setPos(x,0);
     buissonsList.append(buisson);
@@ -76,6 +79,7 @@ void MyScene::update() {
         if(buissonsList[j]->collidesWithItem(singe)){
             removeItem(buissonsList[j]);
             buissonsList.remove(j);
+            MyScene::gameIsOn = false;
             timer1->stop();
             timer2->stop();
             timer3->stop();
