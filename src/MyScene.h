@@ -1,7 +1,6 @@
 #ifndef CPP_QT_TPMINIPROJET_MYSCENE_H
 #define CPP_QT_TPMINIPROJET_MYSCENE_H
 
-// Import des bibliothèque QT
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QGraphicsPixmapItem>
@@ -9,10 +8,6 @@
 #include <QKeyEvent>
 #include <QPainter>
 #include <QLabel>
-
-// Import des bibliothèques c++
-#include <iostream>
-#include <fstream>
 #include <string>
 
 using namespace std;
@@ -26,17 +21,14 @@ private :
     QTimer* timer3;
     QList<QGraphicsPixmapItem*> bananesList;
     QList<QGraphicsPixmapItem*> buissonsList;
-    QGraphicsTextItem* textScore;
-
-    string pseudo;
-    int nbrBananesRecup;
 
 public:
+    int nbrBananesRecup;
+    static bool gameIsOn;
     MyScene(QObject* parent = nullptr);
     virtual ~MyScene();
     void keyPressEvent(QKeyEvent* event);
     void drawBackground(QPainter* painter, const QRectF &rect);
-    void bestScore();
 
 public slots :
     void update();

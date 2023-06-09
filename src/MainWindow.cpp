@@ -1,8 +1,6 @@
-#include <QBoxLayout>
 #include "MainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
-{
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
 
     this->mainScene = new MyScene;
 
@@ -13,7 +11,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     this->setWindowTitle("My main window");
     this->setFixedSize(500, 800);
 
-    regleMenu = menuBar()->addMenu(tr("&regle"));
+    timer1 = new QTimer(this);
+    connect(timer1, SIGNAL(timeout()), this, SLOT(update()));
+    timer1->start(30);
+
+    regleMenu = menuBar()->addMenu(tr("&Regle"));
     QAction* actionRegle = new QAction(tr("&About"), this);
     connect(actionRegle, SIGNAL(triggered()), this, SLOT(slot_aboutRegle()));
     regleMenu->addAction(actionRegle);
@@ -27,6 +29,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 MainWindow::~MainWindow(){
 
+}
+
+void MainWindow::update(){
+    bool value = MyScene::gameIsOn;
+
+    if(!value){
+        mainScene->clear();
+        this->lastScene = new Rejouer;
+        this->mainView->setScene(lastScene);
+    }
 }
 
 void MainWindow::slot_aboutMenu(){

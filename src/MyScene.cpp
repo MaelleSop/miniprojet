@@ -2,7 +2,7 @@
 #include "MainWindow.h"
 #include "Utils.h"
 
-
+bool MyScene::gameIsOn = true;
 
 MyScene::MyScene(QObject* parent) : QGraphicsScene(parent) {
 
@@ -12,8 +12,7 @@ MyScene::MyScene(QObject* parent) : QGraphicsScene(parent) {
 
     QPixmap pixmapSinge("../img/singe.png");
     singe = new QGraphicsPixmapItem(pixmapSinge);
-
-    singe->setPos(10, 450);
+    singe->setPos(10, 550);
     this->addItem(singe);
 
     timer1 = new QTimer(this);
@@ -27,34 +26,6 @@ MyScene::MyScene(QObject* parent) : QGraphicsScene(parent) {
     timer3 = new QTimer(this);
     connect(timer3, SIGNAL(timeout()), this, SLOT(insererBuissons()));
     timer3->start(3500);
-
-    // Affichage de l'entête et des scores
-
-    QGraphicsRectItem* rectScore = new QGraphicsRectItem(0, 0, 500, 40);
-
-    QBrush whiteBrush(Qt::white);
-    rectScore->setBrush(whiteBrush);
-
-    this->addItem(rectScore);
-
-    QImage image("../img/bananes.png");
-    QImage resizedImage = image.scaled(30, 30, Qt::KeepAspectRatio);
-
-    QPixmap banane = QPixmap::fromImage(resizedImage);
-    QGraphicsPixmapItem* imgBanane = new QGraphicsPixmapItem(banane);
-    imgBanane->setPos(10, 5);
-
-    this->addItem(imgBanane);
-
-    this->textScore = new QGraphicsTextItem();
-    textScore->setPos(40, 0);
-
-    // Augmentation de la taille du texte
-    QFont font;
-    font.setPointSize(20);
-    textScore->setFont(font);
-
-    this->addItem(textScore);
 }
 
 MyScene::~MyScene() {
@@ -70,7 +41,7 @@ void MyScene::insererBananes(){
 }
 
 void MyScene::insererBuissons(){
-    QGraphicsPixmapItem* buisson = new QGraphicsPixmapItem(QPixmap("../img/buisson.png"));
+    QGraphicsPixmapItem* buisson = new QGraphicsPixmapItem(QPixmap("../img/gorille.png"));
     int x = Utils::randInt(0,400);
     buisson->setPos(x,0);
     buissonsList.append(buisson);
@@ -87,8 +58,6 @@ void MyScene::update() {
             removeItem(bananesList[i]);
             bananesList.remove(i);
             nbrBananesRecup ++;
-
-            textScore->setPlainText(QString::number(nbrBananesRecup));
             qDebug() << nbrBananesRecup;
         }
         else if(bananesList[i]->y()>740){
@@ -104,12 +73,10 @@ void MyScene::update() {
         if(buissonsList[j]->collidesWithItem(singe)){
             removeItem(buissonsList[j]);
             buissonsList.remove(j);
+            MyScene::gameIsOn = false;
             timer1->stop();
             timer2->stop();
             timer3->stop();
-
-            // Recupérer score du joueur pour l'enregistrer dans un fichier exterieur
-            bestScore();
         }
         else if(buissonsList[j]->y()>740){
             removeItem(buissonsList[j]);
@@ -135,39 +102,4 @@ void MyScene::drawBackground(QPainter* painter, const QRectF &rect) {
     Q_UNUSED(rect);
     QPixmap pixBackground("../img/jungle_ok");
     painter->drawPixmap(QPointF(0,0), pixBackground, sceneRect());
-}
-
-void MyScene::bestScore() {
-
-    pseudo = "pseudo";
-
-    string const nomFichier("../fichier/scores.txt");
-    // Ouverture du fichier => ios::app : permet d'écrire à la fin du fichier
-    ofstream fichierW(nomFichier.c_str());
-
-    // Ouverture du fichier en mode lecture
-    ifstream fichierR(nomFichier.c_str());
-
-    if (fichierR) {
-
-        string testFichier;
-
-        if(getline(fichierR, testFichier)){
-            string line;
-            getline(fichierR, line);
-
-            string score;
-            getline(fichierR, score);
-
-            int bestScore = stoi(score);
-
-            if (bestScore < nbrBananesRecup) {
-                fichierW << pseudo << endl;
-                fichierW << nbrBananesRecup << endl;
-            }
-        } else{
-            fichierW << pseudo << endl;
-            fichierW << nbrBananesRecup << endl;
-        }
-    }
 }
