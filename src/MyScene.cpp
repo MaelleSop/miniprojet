@@ -2,12 +2,11 @@
 #include "MainWindow.h"
 #include "Utils.h"
 
+
+
 MyScene::MyScene(QObject* parent) : QGraphicsScene(parent) {
 
     nbrBananesRecup = 0;
-    compteur = new QLabel(QString("score : ").arg(nbrBananesRecup));
-    compteur->setAlignment(Qt::AlignCenter);
-    compteur->setFixedSize(100,50);
 
     this->setSceneRect(0, 0, 500, 800);
 
@@ -33,7 +32,7 @@ MyScene::MyScene(QObject* parent) : QGraphicsScene(parent) {
 
     QGraphicsRectItem* rectScore = new QGraphicsRectItem(0, 0, 500, 40);
 
-    QBrush whiteBrush(Qt::black);
+    QBrush whiteBrush(Qt::white);
     rectScore->setBrush(whiteBrush);
 
     this->addItem(rectScore);
@@ -88,7 +87,6 @@ void MyScene::update() {
             removeItem(bananesList[i]);
             bananesList.remove(i);
             nbrBananesRecup ++;
-            compteur->setText(QString("score : ").arg(nbrBananesRecup));
 
             textScore->setPlainText(QString::number(nbrBananesRecup));
             qDebug() << nbrBananesRecup;
@@ -111,6 +109,7 @@ void MyScene::update() {
             timer3->stop();
 
             // Recupérer score du joueur pour l'enregistrer dans un fichier exterieur
+            bestScore();
         }
         else if(buissonsList[j]->y()>740){
             removeItem(buissonsList[j]);
@@ -136,4 +135,39 @@ void MyScene::drawBackground(QPainter* painter, const QRectF &rect) {
     Q_UNUSED(rect);
     QPixmap pixBackground("../img/jungle_ok");
     painter->drawPixmap(QPointF(0,0), pixBackground, sceneRect());
+}
+
+void MyScene::bestScore() {
+
+    pseudo = "pseudo";
+
+    string const nomFichier("../fichier/scores.txt");
+    // Ouverture du fichier => ios::app : permet d'écrire à la fin du fichier
+    ofstream fichierW(nomFichier.c_str());
+
+    // Ouverture du fichier en mode lecture
+    ifstream fichierR(nomFichier.c_str());
+
+    if (fichierR) {
+
+        string testFichier;
+
+        if(getline(fichierR, testFichier)){
+            string line;
+            getline(fichierR, line);
+
+            string score;
+            getline(fichierR, score);
+
+            int bestScore = stoi(score);
+
+            if (bestScore < nbrBananesRecup) {
+                fichierW << pseudo << endl;
+                fichierW << nbrBananesRecup << endl;
+            }
+        } else{
+            fichierW << pseudo << endl;
+            fichierW << nbrBananesRecup << endl;
+        }
+    }
 }
