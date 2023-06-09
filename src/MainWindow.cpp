@@ -6,8 +6,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     this->mainScene = new MyScene;
 
+    //this->lancementScene = new Lancement;
+
     this->mainView = new QGraphicsView;
     this->mainView->setScene(mainScene);
+    //this->mainView->setScene(lancementScene);
+
 
     this->setCentralWidget(mainView);
     this->setWindowTitle("My main window");

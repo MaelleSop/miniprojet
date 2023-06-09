@@ -133,7 +133,7 @@ void MyScene::keyPressEvent(QKeyEvent *event) {
 
 void MyScene::drawBackground(QPainter* painter, const QRectF &rect) {
     Q_UNUSED(rect);
-    QPixmap pixBackground("../img/jungle_ok");
+    QPixmap pixBackground("../img/foret_test.jpg");
     painter->drawPixmap(QPointF(0,0), pixBackground, sceneRect());
 }
 

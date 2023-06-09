@@ -11,12 +11,14 @@
 #include <QTextEdit>
 
 #include "MyScene.h"
+#include "Lancement.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
 private :
     MyScene* mainScene;
+    //Lancement* lancementScene;
     QGraphicsView* mainView;
     QMenu* regleMenu;
     QMenu* helpMenu;
