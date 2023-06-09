@@ -33,7 +33,7 @@ MyScene::MyScene(QObject* parent) : QGraphicsScene(parent) {
 
     QGraphicsRectItem* rectScore = new QGraphicsRectItem(0, 0, 500, 40);
 
-    QBrush whiteBrush(Qt::white);
+    QBrush whiteBrush(Qt::black);
     rectScore->setBrush(whiteBrush);
 
     this->addItem(rectScore);
