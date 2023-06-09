@@ -1,7 +1,6 @@
 #include "MainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
-{
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
 
     this->mainScene = new MyScene;
 
@@ -34,6 +33,7 @@ MainWindow::~MainWindow(){
 
 void MainWindow::update(){
     bool value = MyScene::gameIsOn;
+
     if(!value){
         mainScene->clear();
         this->lastScene = new Rejouer;

@@ -8,16 +8,11 @@ MyScene::MyScene(QObject* parent) : QGraphicsScene(parent) {
 
     nbrBananesRecup = 0;
 
-    compteur = new QLabel(QString("score : ").arg(nbrBananesRecup));
-    compteur->setAlignment(Qt::AlignCenter);
-    compteur->setFixedSize(100,50);
-
     this->setSceneRect(0, 0, 500, 800);
 
     QPixmap pixmapSinge("../img/singe.png");
     singe = new QGraphicsPixmapItem(pixmapSinge);
-
-    singe->setPos(10, 450);
+    singe->setPos(10, 550);
     this->addItem(singe);
 
     timer1 = new QTimer(this);
@@ -63,7 +58,6 @@ void MyScene::update() {
             removeItem(bananesList[i]);
             bananesList.remove(i);
             nbrBananesRecup ++;
-            compteur->setText(QString("score : ").arg(nbrBananesRecup));
             qDebug() << nbrBananesRecup;
         }
         else if(bananesList[i]->y()>740){

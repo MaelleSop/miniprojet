@@ -6,6 +6,8 @@
 #include <QGraphicsPixmapItem>
 #include <QTimer>
 #include <QPainter>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 
 using namespace std;
@@ -16,7 +18,10 @@ private :
 
 public :
     Rejouer(QObject* parent = nullptr);
+    QPushButton* rejouer;
     void drawBackground(QPainter* painter, const QRectF &rect);
+public slots:
+    void relancer();
 };
 
 

@@ -22,7 +22,6 @@ class MainWindow : public QMainWindow {
 private :
     MyScene* mainScene;
     QGraphicsView* mainView;
-    Lancement* firstScene;
     Rejouer* lastScene;
     QMenu* regleMenu;
     QMenu* helpMenu;

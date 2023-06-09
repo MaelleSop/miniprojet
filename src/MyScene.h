@@ -8,6 +8,7 @@
 #include <QKeyEvent>
 #include <QPainter>
 #include <QLabel>
+#include <string>
 
 using namespace std;
 
@@ -15,7 +16,6 @@ class MyScene : public QGraphicsScene {
     Q_OBJECT
 private :
     QGraphicsPixmapItem* singe;
-    QLabel* compteur;
     QTimer* timer1;
     QTimer* timer2;
     QTimer* timer3;
