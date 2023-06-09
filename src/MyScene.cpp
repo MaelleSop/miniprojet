@@ -89,8 +89,8 @@ void MyScene::update() {
             bananesList.remove(i);
             nbrBananesRecup ++;
             compteur->setText(QString("score : ").arg(nbrBananesRecup));
-            textScore->setPlainText(QString::number(nbrBananesRecup));
 
+            textScore->setPlainText(QString::number(nbrBananesRecup));
             qDebug() << nbrBananesRecup;
         }
         else if(bananesList[i]->y()>740){
@@ -109,6 +109,8 @@ void MyScene::update() {
             timer1->stop();
             timer2->stop();
             timer3->stop();
+
+            // Recupérer score du joueur pour l'enregistrer dans un fichier exterieur
         }
         else if(buissonsList[j]->y()>740){
             removeItem(buissonsList[j]);
@@ -134,7 +136,4 @@ void MyScene::drawBackground(QPainter* painter, const QRectF &rect) {
     Q_UNUSED(rect);
     QPixmap pixBackground("../img/jungle_ok");
     painter->drawPixmap(QPointF(0,0), pixBackground, sceneRect());
-}
-
-void MyScene::affichageScore(){
 }
