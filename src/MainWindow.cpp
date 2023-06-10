@@ -2,13 +2,12 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
 
-    this->mainScene = new MyScene;
+    //this->mainScene = new MyScene;
 
-    //this->lancementScene = new Lancement;
+    this->lancementScene = new Lancement;
 
     this->mainView = new QGraphicsView;
-    this->mainView->setScene(mainScene);
-    //this->mainView->setScene(lancementScene);
+    this->mainView->setScene(lancementScene);
 
 
     this->setCentralWidget(mainView);
@@ -37,7 +36,6 @@ MainWindow::~MainWindow(){
 
 void MainWindow::update(){
     bool value = MyScene::gameIsOn;
-
     if(!value){
         mainScene->clear();
         this->lastScene = new Rejouer;

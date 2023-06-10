@@ -8,6 +8,10 @@
 #include <QKeyEvent>
 #include <QPainter>
 #include <QLabel>
+
+// Import des bibliothèques c++
+#include <iostream>
+#include <fstream>
 #include <string>
 
 using namespace std;
@@ -21,7 +25,9 @@ private :
     QTimer* timer3;
     QList<QGraphicsPixmapItem*> bananesList;
     QList<QGraphicsPixmapItem*> buissonsList;
+    QGraphicsTextItem* textScore;
 
+    string pseudo;
 public:
     int nbrBananesRecup;
     static bool gameIsOn;
@@ -29,6 +35,7 @@ public:
     virtual ~MyScene();
     void keyPressEvent(QKeyEvent* event);
     void drawBackground(QPainter* painter, const QRectF &rect);
+    void bestScore();
 
 public slots :
     void update();

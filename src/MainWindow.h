@@ -14,7 +14,6 @@
 
 #include "MyScene.h"
 #include "Lancement.h"
-#include "Lancement.h"
 #include "Rejouer.h"
 
 
@@ -23,7 +22,7 @@ class MainWindow : public QMainWindow {
 
 private :
     MyScene* mainScene;
-    //Lancement* lancementScene;
+    Lancement* lancementScene;
     QGraphicsView* mainView;
     Rejouer* lastScene;
     QMenu* regleMenu;

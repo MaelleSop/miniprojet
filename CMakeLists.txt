@@ -15,6 +15,9 @@ add_executable(miniprojet
         src/MyScene.cpp
         src/MyScene.h
         src/MyView.h
+        src/Rejouer.h
+        src/Rejouer.cpp
+        src/Lancement.cpp
         src/Utils.h)
 
 target_link_libraries(miniprojet Qt6::Widgets)
