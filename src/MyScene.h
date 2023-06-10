@@ -8,6 +8,8 @@
 #include <QKeyEvent>
 #include <QPainter>
 #include <QLabel>
+#include <iostream>
+#include <fstream>
 #include <string>
 
 using namespace std;
@@ -15,12 +17,15 @@ using namespace std;
 class MyScene : public QGraphicsScene {
     Q_OBJECT
 private :
+    string pseudo;
+    double vitesse;
     QGraphicsPixmapItem* singe;
+    QGraphicsTextItem* textScore;
     QTimer* timer1;
     QTimer* timer2;
     QTimer* timer3;
     QList<QGraphicsPixmapItem*> bananesList;
-    QList<QGraphicsPixmapItem*> buissonsList;
+    QList<QGraphicsPixmapItem*> gorillesList;
 
 public:
     int nbrBananesRecup;
@@ -29,11 +34,12 @@ public:
     virtual ~MyScene();
     void keyPressEvent(QKeyEvent* event);
     void drawBackground(QPainter* painter, const QRectF &rect);
+    void bestScore();
 
 public slots :
     void update();
     void insererBananes();
-    void insererBuissons();
+    void insererGorilles();
 };
 
 
