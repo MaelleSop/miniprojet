@@ -12,17 +12,22 @@
 #include <QLabel>
 #include <QLineEdit>
 
+#include <QWidget>
+#include <QPushButton>
+#include <QLineEdit>
+#include <QMainWindow>
+
 
 using namespace std;
 
-class Lancement : public QGraphicsScene {
+class Lancement : public QMainWindow {
     Q_OBJECT
 private :
-    QGraphicsProxyWidget* mainWidget;
-    QLineEdit* inputPseudo;
+    QPushButton* bouton;
+    QLineEdit* lineEdit;
 
 public :
-    Lancement(QObject* parent = nullptr);
+    Lancement(QWidget* parent = nullptr);
     void drawBackground(QPainter* painter, const QRectF &rect);
 
 public slots :

@@ -18,6 +18,7 @@ add_executable(miniprojet
         src/Rejouer.h
         src/Rejouer.cpp
         src/Lancement.cpp
+        src/test.cpp
         src/Utils.h)
 
 target_link_libraries(miniprojet Qt6::Widgets)

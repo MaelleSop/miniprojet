@@ -2,21 +2,19 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
 
-    //this->mainScene = new MyScene;
-
-    this->lancementScene = new Lancement;
+    this->mainScene = new MyScene;
 
     this->mainView = new QGraphicsView;
-    this->mainView->setScene(lancementScene);
 
+    this->mainView->setScene(mainScene);
 
     this->setCentralWidget(mainView);
     this->setWindowTitle("My main window");
-    this->setFixedSize(500, 800);
+    this->setFixedSize(500, 840);
 
-    timer1 = new QTimer(this);
+    /*timer1 = new QTimer(this);
     connect(timer1, SIGNAL(timeout()), this, SLOT(update()));
-    timer1->start(30);
+    timer1->start(30);*/
 
     regleMenu = menuBar()->addMenu(tr("&Regle"));
     QAction* actionRegle = new QAction(tr("&About"), this);
