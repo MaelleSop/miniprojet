@@ -12,7 +12,6 @@
 #include <QTimer>
 
 #include "MyScene.h"
-#include "Lancement.h"
 #include "Rejouer.h"
 
 
@@ -22,7 +21,6 @@ class MainWindow : public QMainWindow {
 private :
     MyScene* mainScene;
     QGraphicsView* mainView;
-    Lancement* firstScene;
     Rejouer* lastScene;
     QMenu* regleMenu;
     QMenu* helpMenu;

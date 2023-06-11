@@ -13,17 +13,20 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QGraphicsView>
+#include <QMainWindow>
+#include <QWidget>
 
 
 using namespace std;
 
-class Rejouer : public QGraphicsScene {
+class Rejouer : public QMainWindow{
     Q_OBJECT
 private :
-    QGraphicsProxyWidget* proxyWidget;
+    QLabel* txt;
+    QPushButton* rejouer;
 
 public :
-    Rejouer(QObject* parent = nullptr);
+    Rejouer(QWidget* parent = nullptr);
     void drawBackground(QPainter* painter, const QRectF &rect);
     static bool rejouerGame;
 

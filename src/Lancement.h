@@ -4,34 +4,31 @@
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QGraphicsPixmapItem>
+#include <QGraphicsProxyWidget>
 #include <QTimer>
 #include <QPainter>
-#include <QBoxLayout>
-#include <QGroupBox>
-#include <QLineEdit>
-#include <QFormLayout>
-#include <QTextEdit>
-#include <QGraphicsProxyWidget>
 #include <QPushButton>
 #include <QSize>
 #include <QLabel>
+#include <QLineEdit>
 
-
-#include "MyScene.h"
+#include <QWidget>
+#include <QPushButton>
+#include <QLineEdit>
+#include <QMainWindow>
 
 
 using namespace std;
 
-class Lancement : public QGraphicsScene {
-    Q_OBJECT
+class Lancement : public QMainWindow {
+Q_OBJECT
 private :
-    QGraphicsProxyWidget* mainWidget;
-    QLineEdit* inputPseudo;
+    QPushButton* bouton;
+    QLineEdit* lineEdit;
 
 public :
-    Lancement(QObject* parent = nullptr);
+    Lancement(QWidget* parent = nullptr);
     void drawBackground(QPainter* painter, const QRectF &rect);
-    static bool play;
 
 public slots :
     void recupPseudoPlay();

@@ -35,8 +35,6 @@ public:
     void keyPressEvent(QKeyEvent* event);
     void drawBackground(QPainter* painter, const QRectF &rect);
     void bestScore();
-    void reset();
-    void getTimers();
 
 public slots :
     void update();

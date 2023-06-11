@@ -1,11 +1,32 @@
+#include <QBoxLayout>
+#include <QGroupBox>
+#include <QLineEdit>
+#include <QFormLayout>
+#include <QTextEdit>
 #include "Lancement.h"
+#include "MainWindow.h"
 
-bool Lancement::play = false;
 
-Lancement::Lancement(QObject* parent) : QGraphicsScene(parent){
-    this->setSceneRect(0, 0, 500, 800);
+Lancement::Lancement(QWidget* parent) : QMainWindow(parent){
+    this->resize(500,840);
 
+    QWidget* mainWidget = new QWidget();
     QVBoxLayout* layout = new QVBoxLayout();
+
+    this->bouton = new QPushButton("Play");
+    //QLabel* pseudo = new QLabel("Entrer un pseudo :");
+    this->lineEdit = new QLineEdit();
+
+    layout->addWidget(bouton);
+    layout->addWidget(lineEdit);
+    //layout->addWidget(play);
+
+    connect(bouton, SIGNAL(clicked()), this, SLOT(recupPseudoPlay()));
+
+    mainWidget->setLayout(layout);
+    this->setCentralWidget(mainWidget);
+
+    /*QVBoxLayout* layout = new QVBoxLayout();
     QWidget* widget = new QWidget;
     widget->setLayout(layout);
 
@@ -28,19 +49,23 @@ Lancement::Lancement(QObject* parent) : QGraphicsScene(parent){
 
     addItem(proxyWidget);
 
-    connect(play, SIGNAL(clicked()), this, SLOT(recupPseudoPlay()));
+    connect(play, SIGNAL(clicked()), this, SLOT(recupPseudoPlay()));*/
 }
 
-void Lancement::recupPseudoPlay(){
-    QString Qpseudo = inputPseudo->text();
+/*void Lancement::drawBackground(QPainter* painter, const QRectF &rect) {
+    Q_UNUSED(rect);
+    QPixmap pixBackground("../img/foret_test.jpg");
+    painter->drawPixmap(QPointF(0,0), pixBackground, sceneRect());
+}*/
+
+void Lancement::recupPseudoPlay() {
+    QString Qpseudo = lineEdit->text();
     string pseudo = Qpseudo.toStdString();
-    Lancement::play = true;
+
+    close();
+
+    MainWindow* mainWindow = new MainWindow(this);
+    mainWindow->show();
+
     qDebug() << Qpseudo;
 }
-
-void Lancement::drawBackground(QPainter* painter, const QRectF &rect) {
-    Q_UNUSED(rect);
-    QPixmap pixBackground("../img/jungle2");
-    painter->drawPixmap(QPointF(0,0), pixBackground, sceneRect());
-}
-

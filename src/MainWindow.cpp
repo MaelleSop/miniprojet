@@ -2,12 +2,15 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
 
-    //this->mainScene = new MyScene;
+    /*this->mainScene = new MyScene;
     this->firstScene = new Lancement;
-
     this->mainView = new QGraphicsView;
-    //this->mainView->setScene(mainScene);
-    this->mainView->setScene(firstScene);
+    this->mainView->setScene(mainScene);
+    this->mainView->setScene(firstScene);*/
+
+    this->mainScene = new MyScene;
+    this->mainView = new QGraphicsView;
+    this->mainView->setScene(mainScene);
 
     this->setCentralWidget(mainView);
     this->setWindowTitle("My main window");
@@ -29,37 +32,29 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
 }
 
 MainWindow::~MainWindow(){
-
+    delete mainScene;
+    delete mainView;
+    delete lastScene;
 }
 
 void MainWindow::update(){
     bool valuePerdu = MyScene::gameIsOn;
     bool valueRejouer = Rejouer::rejouerGame;
-    bool valuePlay = Lancement::play;
-
-    if(valuePlay){
-        this->mainScene = new MyScene;
-        this->mainScene->reset();
-        //this->mainScene->getTimers();
-        this->mainView->setScene(mainScene);
-        //this->firstScene->views()[0]->setScene(mainScene);
-    }
 
     if(!valuePerdu){
         /*mainScene->clear();
         this->lastScene = new Rejouer;
         this->mainView->setScene(lastScene);*/
-        this->lastScene = new Rejouer;
-        this->mainView->setScene(lastScene);
+        MyScene::gameIsOn = true;
+        close();
+        Rejouer* windowRejouer = new Rejouer;
+        windowRejouer->show();
     }
     if(valueRejouer){
         /*lastScene->clear();
         this->mainScene = new MyScene;
         this->mainView->setScene(mainScene);*/
-        this->mainScene = new MyScene;
-        this->mainScene->reset();
-        //this->mainScene->getTimers();
-        this->lastScene->views()[0]->setScene(mainScene);
+
     }
 }
 

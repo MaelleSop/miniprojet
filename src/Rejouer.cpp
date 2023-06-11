@@ -1,49 +1,51 @@
 #include "Rejouer.h"
-#include "MyScene.h"
+#include "MainWindow.h"
 
 bool Rejouer::rejouerGame = false;
 
-Rejouer::Rejouer(QObject* parent) : QGraphicsScene(parent){
-    this->setSceneRect(0, 0, 500, 800);
+Rejouer::Rejouer(QWidget* parent) : QMainWindow(parent){
+    //this->setSceneRect(0, 0, 500, 800);
+    //this->resize(500,840);
 
-    QVBoxLayout* layout = new QVBoxLayout();
     QWidget* widget = new QWidget;
-    //widget->setStyleSheet("background-color: transparent;");
+    QVBoxLayout* layout = new QVBoxLayout();
     widget->setLayout(layout);
 
-    QLabel* txt = new QLabel("Vous avez perdu !");
+    this->txt = new QLabel("Vous avez perdu !");
     QFont font("Arial", 32);
-    txt->setFont(font);
-    txt->setStyleSheet("color: red");
+    this->txt->setFont(font);
+    this->txt->setStyleSheet("color: red");
     layout->addWidget(txt);
 
     //faire un QLabel qui affiche le score
 
-    QPushButton* rejouer = new QPushButton();
+    this->rejouer = new QPushButton();
     QPixmap pixmap("../img/rejouer.png"); // Chemin vers l'image
     QIcon icon(pixmap);
-    rejouer->setIcon(icon);
-    rejouer->setIconSize(pixmap.size());
+    this->rejouer->setIcon(icon);
+    this->rejouer->setIconSize(pixmap.size());
     connect(rejouer, SIGNAL(clicked()), this, SLOT(relancer()));
     layout->addWidget(rejouer);
 
-    proxyWidget = new QGraphicsProxyWidget();
-    proxyWidget->setWidget(widget);
+    widget->setLayout(layout);
+    this->setCentralWidget(widget);
 
-    QSize widgetSize = widget->size();
+    /*QSize widgetSize = widget->size();
     int xBtn = (this->width() - widgetSize.width()) / 2;
     int yBtn = ((this->height() - widgetSize.height()) / 2);
-    proxyWidget->setPos(xBtn, yBtn);
+    layout->setPos(xBtn, yBtn);
 
-    addItem(proxyWidget);
+    addItem(proxyWidget);*/
 }
 
 void Rejouer::relancer(){
-    Rejouer::rejouerGame = true;
+    close();
+    MainWindow* mainWindow = new MainWindow(this);
+    mainWindow->show();
 }
 
-void Rejouer::drawBackground(QPainter* painter, const QRectF &rect) {
+/*void Rejouer::drawBackground(QPainter* painter, const QRectF &rect) {
     Q_UNUSED(rect);
     QPixmap pixBackground("../img/jungle2");
     painter->drawPixmap(QPointF(0,0), pixBackground, sceneRect());
-}
+}*/
