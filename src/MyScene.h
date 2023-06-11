@@ -17,7 +17,7 @@ using namespace std;
 class MyScene : public QGraphicsScene {
     Q_OBJECT
 private :
-    string pseudo;
+    QString pseudo;
     double vitesse;
     QGraphicsPixmapItem* singe;
     QGraphicsTextItem* textScore;
@@ -30,7 +30,7 @@ private :
 public:
     int nbrBananesRecup;
     static bool gameIsOn;
-    MyScene(QObject* parent = nullptr);
+    MyScene(QString newPseudo = "pseudo", QObject* parent = nullptr);
     virtual ~MyScene();
     void keyPressEvent(QKeyEvent* event);
     void drawBackground(QPainter* painter, const QRectF &rect);
