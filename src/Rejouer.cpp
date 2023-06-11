@@ -3,7 +3,7 @@
 
 bool Rejouer::rejouerGame = false;
 
-Rejouer::Rejouer(QWidget* parent) : QMainWindow(parent){
+Rejouer::Rejouer(QString newPseudo, QWidget* parent) : QMainWindow(parent), pseudo(newPseudo){
     //this->setSceneRect(0, 0, 500, 800);
     //this->resize(500,840);
 
@@ -40,7 +40,7 @@ Rejouer::Rejouer(QWidget* parent) : QMainWindow(parent){
 
 void Rejouer::relancer(){
     close();
-    MainWindow* mainWindow = new MainWindow(this);
+    MainWindow* mainWindow = new MainWindow(pseudo, this);
     mainWindow->show();
 }
 
