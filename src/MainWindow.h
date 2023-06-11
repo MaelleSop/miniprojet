@@ -27,7 +27,7 @@ private :
     QTimer* timer1;
 
 public:
-    MainWindow(QWidget* parent = nullptr);
+    MainWindow(QString newPseudo = "pseudo", QWidget* parent = nullptr);
     virtual ~MainWindow();
 
 public slots:
