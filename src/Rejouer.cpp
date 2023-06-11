@@ -1,4 +1,5 @@
 #include "Rejouer.h"
+#include "MyScene.h"
 
 bool Rejouer::rejouerGame = false;
 
@@ -28,7 +29,6 @@ Rejouer::Rejouer(QObject* parent) : QGraphicsScene(parent){
 
     proxyWidget = new QGraphicsProxyWidget();
     proxyWidget->setWidget(widget);
-    //proxyWidget->setWidget(rejouer);
 
     QSize widgetSize = widget->size();
     int xBtn = (this->width() - widgetSize.width()) / 2;

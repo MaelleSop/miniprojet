@@ -6,8 +6,8 @@ bool MyScene::gameIsOn = true;
 
 MyScene::MyScene(QObject* parent) : QGraphicsScene(parent) {
 
-    nbrBananesRecup = 0;
-    vitesse = 0;
+    //nbrBananesRecup = 0;
+    //vitesse = 0;
 
     this->setSceneRect(0, 0, 500, 800);
 
@@ -56,6 +56,12 @@ MyScene::~MyScene() {
 
 }
 
+void MyScene::getTimers(){
+    timer1->start(30);
+    timer2->start(2500);
+    timer3->start(3500);
+}
+
 void MyScene::insererBananes(){
     QGraphicsPixmapItem* bananes = new QGraphicsPixmapItem(QPixmap("../img/bananes.png"));
     int x = Utils::randInt(0,450);
@@ -100,9 +106,6 @@ void MyScene::update() {
             removeItem(gorillesList[j]);
             gorillesList.remove(j);
             MyScene::gameIsOn = false;
-            timer1->stop();
-            timer2->stop();
-            timer3->stop();
             // Recupérer score du joueur pour l'enregistrer dans un fichier exterieur
             bestScore();
         }
@@ -124,6 +127,20 @@ void MyScene::keyPressEvent(QKeyEvent *event) {
             singe->setPos(singe->x() + 10, singe->y());
         }
     }
+}
+
+void MyScene::reset(){
+    nbrBananesRecup = 0;
+    vitesse = 0;
+    singe->setPos(10, 550);
+    /*for(int i=0; i<bananesList.size(); i++){
+        removeItem(bananesList[i]);
+        bananesList.remove(i);
+    }
+    for(int j=0; j<gorillesList.size(); j++){
+        removeItem(gorillesList[j]);
+        gorillesList.remove(j);
+    }*/
 }
 
 void MyScene::bestScore() {
@@ -163,3 +180,4 @@ void MyScene::drawBackground(QPainter* painter, const QRectF &rect) {
     QPixmap pixBackground("../img/foret");
     painter->drawPixmap(QPointF(0,0), pixBackground, sceneRect());
 }
+

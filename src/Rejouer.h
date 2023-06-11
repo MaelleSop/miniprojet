@@ -14,6 +14,7 @@
 #include <QLabel>
 #include <QGraphicsView>
 
+
 using namespace std;
 
 class Rejouer : public QGraphicsScene {
