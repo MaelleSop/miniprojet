@@ -12,6 +12,7 @@
 // Import des bibliothèques c++
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 #include <string>
 
 using namespace std;
@@ -24,23 +25,25 @@ private :
     QTimer* timer2;
     QTimer* timer3;
     QList<QGraphicsPixmapItem*> bananesList;
-    QList<QGraphicsPixmapItem*> buissonsList;
+    QList<QGraphicsPixmapItem*> gorillesList;
     QGraphicsTextItem* textScore;
 
-    string pseudo;
+    QString pseudo;
+    double vitesse;
+
 public:
     int nbrBananesRecup;
     static bool gameIsOn;
-    MyScene(QObject* parent = nullptr);
+    MyScene(QString newPseudo = "pseudo", QObject* parent = nullptr);
     virtual ~MyScene();
     void keyPressEvent(QKeyEvent* event);
     void drawBackground(QPainter* painter, const QRectF &rect);
     void bestScore();
 
 public slots :
-    void update();
+    void updateGame();
     void insererBananes();
-    void insererBuissons();
+    void insererGorilles();
 };
 
 

@@ -21,22 +21,25 @@ class MainWindow : public QMainWindow {
     Q_OBJECT
 
 private :
-    MyScene* mainScene;
-    Lancement* lancementScene;
+    //MyScene* mainScene;
+    QGraphicsScene* mainScene;
     QGraphicsView* mainView;
     Rejouer* lastScene;
     QMenu* regleMenu;
     QMenu* helpMenu;
     QTimer* timer1;
 
+    QString pseudo;
+
 public:
-    MainWindow(QWidget* parent = nullptr);
+    MainWindow(QString newPseudo = "pseudo", QWidget* parent = nullptr);
     virtual ~MainWindow();
 
 public slots:
     void slot_aboutMenu();
     void slot_aboutRegle();
     void update();
+
 };
 
 

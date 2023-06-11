@@ -1,20 +1,19 @@
 #include "MainWindow.h"
+#include "Utils.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
+MainWindow::MainWindow(QString newPseudo, QWidget *parent) : QMainWindow(parent), pseudo(newPseudo){
 
-    this->mainScene = new MyScene;
-
+    this->mainScene = new MyScene(newPseudo);
     this->mainView = new QGraphicsView;
-
     this->mainView->setScene(mainScene);
 
     this->setCentralWidget(mainView);
     this->setWindowTitle("My main window");
     this->setFixedSize(500, 840);
 
-    /*timer1 = new QTimer(this);
+    timer1 = new QTimer(this);
     connect(timer1, SIGNAL(timeout()), this, SLOT(update()));
-    timer1->start(30);*/
+    timer1->start(30);
 
     regleMenu = menuBar()->addMenu(tr("&Regle"));
     QAction* actionRegle = new QAction(tr("&About"), this);
@@ -29,15 +28,23 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
 }
 
 MainWindow::~MainWindow(){
-
+    delete mainScene;
+    delete mainView;
+    delete lastScene;
 }
 
 void MainWindow::update(){
-    bool value = MyScene::gameIsOn;
-    if(!value){
-        mainScene->clear();
+    bool valuePerdu = MyScene::gameIsOn;
+    bool valueRejouer = Rejouer::rejouerGame;
+
+    if(!valuePerdu){
+        /*mainScene->clear();
         this->lastScene = new Rejouer;
-        this->mainView->setScene(lastScene);
+        this->mainView->setScene(lastScene);*/
+        close();
+        MyScene::gameIsOn = true;
+        Rejouer* windowRejouer = new Rejouer(pseudo);
+        windowRejouer->show();
     }
 }
 
@@ -50,7 +57,8 @@ void MainWindow::slot_aboutMenu(){
 
 void MainWindow::slot_aboutRegle(){
     QMessageBox regles;
-    regles.setText("Voici les règles du jeu :");
+    regles.setText("Voici les règles du jeu : :\nL'objectif du petit singe est de mangé le plus de bananes possible en esquivant le méchant gorille. S'il vous attrape vous avez perdu.");
     regles.setModal(true);
     regles.exec();
 }
+
