@@ -5,7 +5,7 @@
 
 bool MyScene::gameIsOn = true;
 
-MyScene::MyScene(QObject* parent) : QGraphicsScene(parent) {
+MyScene::MyScene(QString newPseudo, QObject* parent) : QGraphicsScene(parent), pseudo(newPseudo) {
 
     nbrBananesRecup = 0;
     vitesse = 0;
@@ -34,23 +34,33 @@ MyScene::MyScene(QObject* parent) : QGraphicsScene(parent) {
 
     QBrush whiteBrush(Qt::white);
     rectScore->setBrush(whiteBrush);
+    QPen pen(Qt::white);
+    rectScore->setPen(pen);
     this->addItem(rectScore);
+    
+    QGraphicsTextItem* textPseudo = new QGraphicsTextItem();
+    textPseudo->setPlainText(pseudo);
+    textPseudo->setPos(5, 5);
 
     QImage image("../img/bananes.png");
     QImage resizedImage = image.scaled(30, 30, Qt::KeepAspectRatio);
 
     QPixmap banane = QPixmap::fromImage(resizedImage);
     QGraphicsPixmapItem* imgBanane = new QGraphicsPixmapItem(banane);
-    imgBanane->setPos(10, 5);
+    imgBanane->setPos(100, 5);
     this->addItem(imgBanane);
 
     this->textScore = new QGraphicsTextItem();
-    textScore->setPos(40, 0);
+    textScore->setPos(130, 0);
     // Augmentation de la taille du texte
     QFont font;
     font.setPointSize(20);
     textScore->setFont(font);
+    font.setPointSize(15);
+    textPseudo->setFont(font);
     this->addItem(textScore);
+    this->addItem(textPseudo);
+
 }
 
 MyScene::~MyScene() {
@@ -126,7 +136,7 @@ void MyScene::keyPressEvent(QKeyEvent *event) {
 }
 
 void MyScene::bestScore() {
-    pseudo = "pseudo";
+    string Spseudo = pseudo.toStdString();
 
     string const nomFichier("../fichier/scores.txt");
     // Ouverture du fichier => ios::app : permet d'écrire à la fin du fichier
@@ -147,11 +157,11 @@ void MyScene::bestScore() {
             int bestScore = stoi(score);
 
             if (bestScore < nbrBananesRecup) {
-                fichierW << pseudo << endl;
+                fichierW << Spseudo << endl;
                 fichierW << nbrBananesRecup << endl;
             }
         } else {
-            fichierW << pseudo << endl;
+            fichierW << Spseudo << endl;
             fichierW << nbrBananesRecup << endl;
         }
     }
