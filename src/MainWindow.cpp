@@ -1,6 +1,6 @@
 #include "MainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
+MainWindow::MainWindow(QString newPseudo, QWidget *parent) : QMainWindow(parent){
 
     /*this->mainScene = new MyScene;
     this->firstScene = new Lancement;
@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     this->mainView->setScene(mainScene);
     this->mainView->setScene(firstScene);*/
 
-    this->mainScene = new MyScene;
+    this->mainScene = new MyScene (newPseudo);
     this->mainView = new QGraphicsView;
     this->mainView->setScene(mainScene);
 
