@@ -20,13 +20,15 @@
 using namespace std;
 
 class Rejouer : public QMainWindow{
-    Q_OBJECT
+Q_OBJECT
 private :
     QLabel* txt;
     QPushButton* rejouer;
 
+    QString pseudo;
+
 public :
-    Rejouer(QWidget* parent = nullptr);
+    Rejouer(QString newPseudo = "pseudo", QWidget* parent = nullptr);
     void drawBackground(QPainter* painter, const QRectF &rect);
     static bool rejouerGame;
 
